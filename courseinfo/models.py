@@ -116,7 +116,6 @@ class Section(models.Model):
         ]
 
 
-
 class Registration(models.Model):
     registration_id = models.AutoField(primary_key=True)
     student = models.ForeignKey(Student,related_name='registrations', on_delete=models.PROTECT)

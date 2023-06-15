@@ -2,17 +2,17 @@
 <html lang="en">
 
 {%  block title %}
-    Instructor List
+    Section List
 {%  endblock %}
 
 {%  block content %}
     <ul>
-        {% for instructor in instructor_list %}
+        {% for section in section_list %}
             <li>
-                <a href=""> {{ instructor }} </a>
+                <a href=""> {{ section }} </a>
             </li>
         {%  empty   %}
-            <li><em>There are currently no instructors.</em></li>
+            <li><em>There are currently no sections.</em></li>
         {% endfor %}
     </ul>
 {%  endblock %}
