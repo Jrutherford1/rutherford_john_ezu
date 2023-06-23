@@ -1,0 +1,24 @@
+{% extends 'courseinfo/base.html' %}
+
+{% block title %}
+    Semester - {{ semester }}
+{% endblock %}
+
+{% block content %}
+    <h2>{{ semester }}</h2>
+
+    <section>
+        <h3>Sections</h3>
+        <ul>
+            {% for section in section_list %}
+                <li>
+                    <a href="">{{ section }}</a>
+                </li>
+            {% empty %}
+                <li><em>There are no sections for this semester.</em></li>
+            {% endfor %}
+        </ul>
+    </section>
+
+
+{% endblock %}

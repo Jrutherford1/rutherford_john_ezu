@@ -1,0 +1,40 @@
+{% extends 'courseinfo/base.html' %}
+
+{% block title %}
+    Course - {{ course }}
+{% endblock %}
+
+{% block content %}
+    <h2>{{ course}}</h2>
+
+    <section>
+        <table>
+            <tr>
+                <th>Course ID:</th>
+                <td>{{ course.course_id }}</td>
+            </tr>
+            <tr>
+                <th>Course Number:</th>
+                <td>{{ course.number }}</td>
+            </tr>
+            <tr>
+                <th>Course Name:</th>
+                <td>{{ course.name }}</td>
+        </table>
+    </section>
+
+    <section>
+        <h3>Sections</h3>
+        <ul>
+            {% for section in section_list %}
+                <li>
+                    <a href="">{{ section }}</a>
+                </li>
+            {% empty %}
+                <li><em>There are currently no sections for this semester.</em></li>
+            {% endfor %}
+        </ul>
+    </section>
+
+
+{% endblock %}

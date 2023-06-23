@@ -1,0 +1,42 @@
+{% extends 'courseinfo/base.html' %}
+
+{% block title %}
+    Student - {{ student }}
+{% endblock %}
+
+{% block content %}
+    <h2>{{ student }}</h2>
+
+    <section>
+        <table>
+            <tr>
+                <th>First Name:</th>
+                <td>{{ student.first_name }}</td>
+            </tr>
+            <tr>
+                <th>Last Name:</th>
+                <td>{{ student.last_name }}</td>
+            </tr>
+            {% if student.disambiguator %}
+                <tr>
+                    <th>Disambiguator:</th>
+                    <td>{{ student.disambiguator }}</td>
+                </tr>
+            {% endif %}
+        </table>
+    </section>
+
+    <section>
+        <h3>Registered for sections</h3>
+        <ul>
+            {% for section in section_list %}
+                <li>
+                    <a href="">{{ section }}</a>
+                </li>
+            {% empty %}
+                <li><em>There are currently no sections for this student.</em></li>
+            {% endfor %}
+        </ul>
+    </section>
+{% endblock %}
+>
