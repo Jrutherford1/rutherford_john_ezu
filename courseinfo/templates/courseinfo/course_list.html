@@ -9,7 +9,7 @@
     <ul>
         {% for course in course_list %}
             <li>
-                <a href=""> {{ course }} </a>
+                <a href="{{ course.get_absolute_url }}"> {{ course }} </a>
             </li>
         {%  empty   %}
             <li><em>There are currently no courses.</em></li>

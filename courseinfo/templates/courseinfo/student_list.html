@@ -9,7 +9,7 @@
     <ul>
         {% for student in student_list %}
             <li>
-                <a href=""> {{ student }} </a>
+                <a href="{{ student.get_absolute_url }}"> {{ student }} </a>
             </li>
         {%  empty   %}
             <li><em>There are currently no students.</em></li>
