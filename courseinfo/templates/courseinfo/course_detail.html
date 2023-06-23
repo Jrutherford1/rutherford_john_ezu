@@ -1,40 +1,23 @@
 {% extends 'courseinfo/base.html' %}
 
 {% block title %}
-    Course - {{ course }}
+    Course - {{ number }} - {{ name }}
 {% endblock %}
 
 {% block content %}
-    <h2>{{ course}}</h2>
+    <h2>{{ number }} - {{ name }}</h2>
 
     <section>
         <table>
             <tr>
-                <th>Course ID:</th>
-                <td>{{ course.course_id }}</td>
-            </tr>
-            <tr>
                 <th>Course Number:</th>
-                <td>{{ course.number }}</td>
+                <td>{{ number }}</td>
             </tr>
             <tr>
                 <th>Course Name:</th>
-                <td>{{ course.name }}</td>
+                <td>{{ name }}</td>
+            </tr>
         </table>
     </section>
-
-    <section>
-        <h3>Sections</h3>
-        <ul>
-            {% for section in section_list %}
-                <li>
-                    <a href="">{{ section }}</a>
-                </li>
-            {% empty %}
-                <li><em>There are currently no sections for this semester.</em></li>
-            {% endfor %}
-        </ul>
-    </section>
-
 
 {% endblock %}

@@ -26,7 +26,8 @@ class InstructorDetail(View):
         return render(
             request,
             'courseinfo/instructor_detail.html',
-            {'instructor': instructor, 'section_list': section_list}
+            {'instructor': instructor,
+             'section_list': section_list}
         )
 
 
@@ -73,16 +74,15 @@ class CourseList(View):
 class CourseDetail(View):
     def get(self, request, pk):
         course = get_object_or_404(Course, pk=pk)
-        course_id = course.course_id
-        course_number = course.course_number
-        course_name = course.course_name
+        number = course.course_number
+        name = course.course_name
         return render(
             request,
             'courseinfo/course_detail.html',
-            {'course_id': course_id,
-             'course_number': course_number,
-             'course_name': course_name,}
+            {'number': number,
+             'name': name}
         )
+
 
 
 class SemesterList(View):
@@ -103,7 +103,8 @@ class SemesterDetail(View):
         return render(
             request,
             'courseinfo/semester_detail.html',
-            {'semester': semester, 'section_list': section_list}
+            {'semester': semester,
+             'section_list': section_list}
         )
 
 
@@ -119,15 +120,12 @@ class StudentList(View):
 
 
 class StudentDetail(View):
-
     def get(self, request, pk):
         student = get_object_or_404(Student, pk=pk)
-        first_name = student.first_name
-        last_name = student.last_name
         return render(
             request,
             'courseinfo/student_detail.html',
-            {'first_name': first_name, 'last_name': last_name}
+            {'student': student}
         )
 
 
@@ -140,16 +138,17 @@ class RegistrationList(View):
             {'registration_list': Registration.objects.all()}
         )
 
-class RegistrationDetail(View):
 
+class RegistrationDetail(View):
     def get(self, request, pk):
         registration = get_object_or_404(Registration, pk=pk)
-        student_list = registration.student
-        section_list = registration.sections.all()
+        student = registration.student
+        section = registration.section
         return render(
             request,
             'courseinfo/registration_detail.html',
-            {'students': student_list, 'sections': section_list}
+            {'student': student,
+             'section': section}
         )
 
 

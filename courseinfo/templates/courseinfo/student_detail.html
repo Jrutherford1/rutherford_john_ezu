@@ -1,7 +1,7 @@
 {% extends 'courseinfo/base.html' %}
 
 {% block title %}
-    Student - {{ student }}
+    Student - {{ student.first_name }} {{ student.last_name
 {% endblock %}
 
 {% block content %}
@@ -26,17 +26,16 @@
         </table>
     </section>
 
-    <section>
-        <h3>Registered for sections</h3>
-        <ul>
-            {% for section in section_list %}
-                <li>
-                    <a href="">{{ section }}</a>
-                </li>
-            {% empty %}
-                <li><em>There are currently no sections for this student.</em></li>
-            {% endfor %}
-        </ul>
-    </section>
+     <h3>Registrations</h3>
+        <section>
+            <ul>
+                {% for registration in student.registrations.all %}
+                    <li>{{ registration }}</li>
+                {% empty %}
+                    <li><em>This student has no registrations.</em></li>
+                {% endfor %}
+            </ul>
+        </section>
+
+
 {% endblock %}
->
