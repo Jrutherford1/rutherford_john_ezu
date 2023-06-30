@@ -11,7 +11,7 @@
         <table>
             <tr>
                 <th>Course:</th>
-                <td><a href="">{{ course }}</a></td>
+                <td><a href="{{ course.get_absolute_url }}">{{ course }}</a></td>
             </tr>
             <tr>
                 <th>Section Name:</th>
@@ -19,12 +19,12 @@
             </tr>
             <tr>
                 <th>Semester:</th>
-                <td><a href="">{{ semester }}</a></td>
+                <td><a href="{{ semester.get_absolute_url }}">{{ semester }}</a></td>
             </tr>
 
             <tr>
                 <th>Instructor:</th>
-                <td><a href="">{{ instructor }}</a></td>
+                <td><a href="{{ instructor.get_absolute_url }}">{{ instructor }}</a></td>
             </tr>
         </table>
 
@@ -35,7 +35,7 @@
         <ul>
             {% for registration in registration_list %}
                 <li>
-                    <a href="">{{ registration.student }}</a>
+                    <a href="{{ registration.get_absolute_url }}">{{ registration.student }}</a>
                 </li>
             {% empty %}
                 <li><em>There are currently no students registered for this section.</em></li>
