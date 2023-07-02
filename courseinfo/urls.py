@@ -58,7 +58,7 @@ urlpatterns = [
          InstructorCreate.as_view(),
             name='courseinfo_instructor_create_urlpattern'),
 
-    path('instructor/<int:pk/update/>',
+    path('instructor/<int:pk>/update/>',
          InstructorUpdate.as_view(),
             name='courseinfo_instructor_update_urlpattern'),
 
@@ -74,7 +74,7 @@ urlpatterns = [
          SectionCreate.as_view(),
          name='courseinfo_section_create_urlpattern'),
 
-    path('section/<int:pk/update/>',
+    path('section/<int:pk>/update/>',
          SectionUpdate.as_view(),
             name='courseinfo_section_update_urlpattern'),
 
@@ -90,7 +90,7 @@ urlpatterns = [
          CourseCreate.as_view(),
          name='courseinfo_course_create_urlpattern'),
 
-    path('instructor/<int:pk/update/>',
+    path('instructor/<int:pk>/update/>',
          CourseUpdate.as_view(),
             name='courseinfo_course_update_urlpattern'),
 
@@ -106,7 +106,7 @@ urlpatterns = [
          SemesterCreate.as_view(),
          name='courseinfo_semester_create_urlpattern'),
 
-    path('semester/<int:pk/update/>',
+    path('semester/<int:pk>/update/>',
          SemesterUpdate.as_view(),
             name='courseinfo_semester_update_urlpattern'),
 
@@ -114,7 +114,7 @@ urlpatterns = [
          StudentList.as_view(),
          name='courseinfo_student_list_urlpattern'),
 
-    path('student/<int:pk>/',
+    path('student/<int:pk>>/',
          StudentDetail.as_view(),
          name='courseinfo_student_detail_urlpattern'),
 
@@ -122,7 +122,7 @@ urlpatterns = [
          StudentCreate.as_view(),
          name='courseinfo_student_create_urlpattern'),
 
-    path('student/<int:pk/update/>',
+    path('student/<int:pk>/update/>',
          StudentUpdate.as_view(),
             name='courseinfo_student_update_urlpattern'),
 
@@ -138,7 +138,7 @@ urlpatterns = [
          RegistrationCreate.as_view(),
          name='courseinfo_registration_create_urlpattern'),
 
-    path('registration/<int:pk/update/>',
+    path('registration/<int:pk>/update/>',
          RegistrationUpdate.as_view(),
             name='courseinfo_registration_update_urlpattern'),
 
