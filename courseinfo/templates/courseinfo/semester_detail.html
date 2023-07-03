@@ -1,11 +1,11 @@
 {% extends 'courseinfo/base.html' %}
 
 {% block title %}
-    Semester - {{ semester.semester_id }}
+    Semester Detail
 {% endblock %}
 
 {% block content %}
-    <h2>{{ semester }}</h2>
+    <h2>Semester Detail {{ semester }}</h2>
     <ul>
         <li>
             <a href="{{ semester.get_update_url }}"> Edit Semester</a>

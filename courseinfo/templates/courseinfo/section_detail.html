@@ -1,11 +1,11 @@
 {% extends 'courseinfo/base.html' %}
 
 {% block title %}
-    Section - {{ section }}
+    Section
 {% endblock %}
 
 {% block content %}
-    <h2>{{ section.section_name }}</h2>
+    <h2>Section Detail: {{ section.section_name }}</h2>
     <ul>
         <li>
             <a href="{{ section.get_update_url }}"> Edit Section</a>

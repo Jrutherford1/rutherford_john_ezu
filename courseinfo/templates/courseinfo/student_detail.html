@@ -1,11 +1,11 @@
 {% extends 'courseinfo/base.html' %}
 
 {% block title %}
-    Student - {{ student.first_name }} {{ student.last_name }}
+    Student Detail
 {% endblock %}
 
 {% block content %}
-    <h2>{{ student }}</h2>
+    <h2>Student Detail: {{ student }}</h2>
     <ul>
         <li>
             <a href="{{ student.get_update_url }}"> Edit Student</a>
