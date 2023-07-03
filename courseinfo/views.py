@@ -89,19 +89,10 @@ class SectionList(View):
 class SectionDetail(View):
     def get(self, request, pk):
         section = get_object_or_404(Section, pk=pk)
-        semester = section.semester
-        course = section.course
-        instructor = section.instructor
-        registration_list = section.registrations.all()
         return render(
             request,
             'courseinfo/section_detail.html',
-            {'section': section,
-             'semester': semester,
-             'course': course,
-             'instructor': instructor,
-             'registration_list': registration_list
-            }
+            {'section': section}
         )
 
 
@@ -161,13 +152,10 @@ class CourseList(View):
 class CourseDetail(View):
     def get(self, request, pk):
         course = get_object_or_404(Course, pk=pk)
-        number = course.course_number
-        name = course.course_name
         return render(
             request,
             'courseinfo/course_detail.html',
-            {'number': number,
-             'name': name}
+            {'course': course}
         )
 
 
@@ -228,12 +216,10 @@ class SemesterDetail(View):
 
     def get(self, request, pk):
         semester = get_object_or_404(Semester, pk=pk)
-        section_list = semester.sections.all()
         return render(
             request,
             'courseinfo/semester_detail.html',
-            {'semester': semester,
-             'section_list': section_list}
+            {'semester': semester}
         )
 
 
@@ -356,13 +342,10 @@ class RegistrationList(View):
 class RegistrationDetail(View):
     def get(self, request, pk):
         registration = get_object_or_404(Registration, pk=pk)
-        student = registration.student
-        section = registration.section
         return render(
-            request,
-            'courseinfo/registration_detail.html',
-            {'student': student,
-             'section': section}
+        request,
+        'courseinfo/registration_detail.html',
+        {'registration': registration}
         )
 
 

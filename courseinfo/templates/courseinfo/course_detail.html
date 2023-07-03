@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-    <h2>{{ number }} - {{ name }}</h2>
+    <h2>{{ course.course_number }} - {{ course.course_name }}</h2>
     <ul>
         <li>
             <a href="{{ course.get_update_url }}"> Edit Course</a>
@@ -16,11 +16,11 @@
         <table>
             <tr>
                 <th>Course Number:</th>
-                <td>{{ number }}</td>
+                <td>{{ course.course_number }}</td>
             </tr>
             <tr>
                 <th>Course Name:</th>
-                <td>{{ name }}</td>
+                <td>{{ course.course_name }}</td>
             </tr>
         </table>
     </section>
