@@ -1,0 +1,26 @@
+{% extends 'courseinfo/base.html' %}
+
+{% block title %}
+    Error Deleting Registration
+{% endblock %}
+
+{% block content %}
+    <div>
+        <h2>Error Deleting Registration</h2>
+        <p>
+            You may not delete registration {{ registration }}.  This
+            registration is currently assigned to the following
+            sections:
+        </p>
+
+        <ul>
+            {% for section in sections %}
+            <li><a href="{{ section.get_absolute_url }}">{{ section }}</a></li>
+            {%  endfor %}
+        </ul>
+
+        <p>
+            Return to <a href="{% url 'courseinfo_registration_list_urlpattern' %}">Registration List</a>.
+        </p>
+    </div>
+{% endblock %}
