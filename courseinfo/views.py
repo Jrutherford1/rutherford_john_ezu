@@ -176,18 +176,27 @@ class SectionDelete(View):
 
     def get(self, request, pk):
         section = self.get_object(pk)
-        return render(
-            request,
-            'courseinfo/section_confirm_delete.html',
-            {'section': section}
-        )
+        registrations = section.registrations.all()
+        if registrations.count() > 0:
+            return render(
+                request,
+                'courseinfo/section_refuse_delete.html',
+                {'section': section,
+                 'registrations': registrations,
+                 }
+            )
+        else:
+            return render(
+                request,
+                'courseinfo/section_confirm_delete.html',
+                {'section': section}
+            )
 
     def get_object(self, pk):
-        section = get_object_or_404(
+        return get_object_or_404(
             Section,
             pk=pk
         )
-        return section
 
     def post(self, request, pk):
         section = self.get_object(pk)
@@ -290,7 +299,6 @@ class CourseDelete(View):
         return redirect('courseinfo_course_list_urlpattern')
 
 
-
 class SemesterList(View):
 
     def get(self, request):
@@ -354,15 +362,26 @@ class SemesterUpdate(View):
                 self.template_name,
                 context)
 
+
 class SemesterDelete(View):
 
     def get(self, request, pk):
         semester = self.get_object(pk)
-        return render(
-            request,
-            'courseinfo/semester_confirm_delete.html',
-            {'semester': semester}
-        )
+        sections = semester.sections.all()
+        if sections.count() > 0:
+            return render(
+                request,
+                'courseinfo/semester_refuse_delete.html',
+                {'smester': semester,
+                 'sections': sections,
+                 }
+            )
+        else:
+            return render(
+                request,
+                'courseinfo/semester_confirm_delete.html',
+                {'semester': semester }
+            )
 
     def get_object(self, pk):
         semester = get_object_or_404(
@@ -375,7 +394,6 @@ class SemesterDelete(View):
         semester = self.get_object(pk)
         semester.delete()
         return redirect('courseinfo_semester_list_urlpattern')
-
 
 
 class StudentList(View):
@@ -470,8 +488,6 @@ class StudentDelete(View):
         student = self.get_object(pk)
         student.delete()
         return redirect('courseinfo_student_list_urlpattern')
-
-
 
 
 class RegistrationList(View):
