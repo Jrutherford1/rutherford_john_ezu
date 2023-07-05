@@ -14,10 +14,11 @@
         </p>
 
         <ul>
-            {% for section in sections %}
-            <li><a href="{{ section.get_absolute_url }}">{{ section }}</a></li>
-            {%  endfor %}
-        </ul>
+                {% for registration in student.registrations.all %}
+                    <li>{{ registration }}</li>
+
+                {% endfor %}
+            </ul>
 
         <p>
             Return to <a href="{% url 'courseinfo_student_list_urlpattern' %}">Student List</a>.
