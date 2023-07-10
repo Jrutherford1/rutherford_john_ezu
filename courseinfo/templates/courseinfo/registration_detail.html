@@ -1,30 +1,33 @@
 {% extends 'courseinfo/base.html' %}
 
 {% block title %}
-    Registration Detail
+    Registration - {{ registration }}
 {% endblock %}
 
 {% block content %}
-    <h2>Registration Detail</h2>
-    <ul>
+    <h2>{{ registration }}</h2>
+    <ul class="ezu-button-list">
         <li>
-            <a href="{{ registration.get_update_url }}"> Edit Registration</a>
-        </li>
+          <a href="{{ registration.get_update_url }}"
+             class="button button-primary">
+            Edit Registration</a></li>
         <li>
-            <a href="{{ registration.get_delete_url }}"> Delete Registration</a>
-        </li>
+          <a href="{{ registration.get_delete_url }}"
+             class="button button-primary">
+            Delete Registration</a></li>
     </ul>
 
     <section>
-         <table>
+        <table>
             <tr>
                 <th>Student:</th>
-                <td><a href="{{ student.get_absolute_url }}">{{ registration.student }}</a></td>
+                <td><a href="{{ student.get_absolute_url }}">{{ student }}</a></td>
             </tr>
             <tr>
                 <th>Section:</th>
-                <td><a href="{{ section.get_absolute_url }}">{{ registration.section }}</a></td>
-             </tr>
+                <td><a href="{{ section.get_absolute_url }}">{{ section }}</a></td>
+            </tr>
         </table>
     </section>
+
 {% endblock %}

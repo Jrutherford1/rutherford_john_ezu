@@ -1,18 +1,20 @@
 {% extends 'courseinfo/base.html' %}
 
 {% block title %}
-    Student Detail
+    Student - {{ student }}
 {% endblock %}
 
 {% block content %}
-    <h2>Student Detail: {{ student }}</h2>
-    <ul>
+    <h2>{{ student }}</h2>
+    <ul class="ezu-button-list">
         <li>
-            <a href="{{ student.get_update_url }}"> Edit Student</a>
-        </li>
+          <a href="{{ student.get_update_url }}"
+             class="button button-primary">
+            Edit Student</a></li>
         <li>
-            <a href="{{ student.get_delete_url }}"> Delete Student</a>
-        </li>
+          <a href="{{ student.get_delete_url }}"
+             class="button button-primary">
+            Delete Student</a></li>
     </ul>
 
     <section>
@@ -34,16 +36,16 @@
         </table>
     </section>
 
-     <h3>Registrations</h3>
-        <section>
-            <ul>
-                {% for registration in student.registrations.all %}
-                    <li>{{ registration }}</li>
-                {% empty %}
-                    <li><em>This student has no registrations.</em></li>
-                {% endfor %}
-            </ul>
-        </section>
-
-
+    <section>
+        <h3>Registrations</h3>
+        <ul>
+            {% for registration in registration_list %}
+                <li>
+                    <a href="{{ registration.get_absolute_url }}">{{ registration.section }}</a>
+                </li>
+            {% empty %}
+                <li><em>This student is not currently registered for any sections.</em></li>
+            {% endfor %}
+        </ul>
+    </section>
 {% endblock %}

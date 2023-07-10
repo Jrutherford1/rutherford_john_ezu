@@ -1,22 +1,23 @@
-{%  extends 'courseinfo/base.html' %}
-<html lang="en">
+{% extends 'courseinfo/base.html' %}
 
-{%  block title %}
+{% block title %}
     Student List
-{%  endblock %}
+{% endblock %}
 
-{%  block content %}
+{% block content %}
     <h2>Student List</h2>
     <div>
-        <a href="{% url 'courseinfo_student_create_urlpattern' %}">Create New Student</a>
+      <a href="{% url 'courseinfo_student_create_urlpattern' %}"
+         class="button button-primary">
+        Create New Student</a>
     </div>
     <ul>
         {% for student in student_list %}
             <li>
-                <a href="{{ student.get_absolute_url }}"> {{ student }} </a>
+                <a href="{{ student.get_absolute_url }}">{{ student }}</a>
             </li>
-        {%  empty   %}
-            <li><em>There are currently no students.</em></li>
+        {% empty %}
+            <li><em>There are currently no students available.</em></li>
         {% endfor %}
     </ul>
 
@@ -39,5 +40,5 @@
         </li>
       {% endif %}
     </ul>
-    {% endif %}
-{%  endblock %}
+  {% endif %}
+{% endblock %}

@@ -5,12 +5,12 @@
 {% endblock %}
 
 {% block content %}
-    <h2>Create Section</h2>
     <form
         action="{% url 'courseinfo_section_create_urlpattern'%}"
         method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Create Section</button>
+        <button type="submit" class="button button-primary">
+        Create Section</button>
     </form>
 {% endblock %}

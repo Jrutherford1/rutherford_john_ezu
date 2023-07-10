@@ -7,7 +7,8 @@
 {% block content %}
     <h2>Instructor List</h2>
     <div>
-      <a href="{% url 'courseinfo_instructor_create_urlpattern' %}">
+      <a href="{% url 'courseinfo_instructor_create_urlpattern' %}"
+      class="button button-primary">
         Create New Instructor</a>
     </div>
     <ul>
@@ -41,5 +42,3 @@
     </ul>
   {% endif %}
 {% endblock %}
-
-

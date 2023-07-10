@@ -5,12 +5,11 @@
 {% endblock %}
 
 {% block content %}
-    <h2>Create Semester</h2>
     <form
         action="{% url 'courseinfo_semester_create_urlpattern'%}"
         method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Create Semester</button>
+        <button type="submit" class="button button-primary">Create Semester</button>
     </form>
 {% endblock %}

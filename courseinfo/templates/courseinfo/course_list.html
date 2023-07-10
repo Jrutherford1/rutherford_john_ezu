@@ -1,22 +1,23 @@
-{%  extends 'courseinfo/base.html' %}
-<html lang="en">
+{% extends 'courseinfo/base.html' %}
 
-{%  block title %}
+{% block title %}
     Course List
-{%  endblock %}
+{% endblock %}
 
-{%  block content %}
+{% block content %}
     <h2>Course List</h2>
     <div>
-        <a href="{% url 'courseinfo_course_create_urlpattern' %}">Create New Course</a>
+        <a href="{% url 'courseinfo_course_create_urlpattern' %}"
+            class="button button-primary">
+            Create New Course</a>
     </div>
     <ul>
         {% for course in course_list %}
             <li>
-                <a href="{{ course.get_absolute_url }}"> {{ course }} </a>
+                <a href="{{ course.get_absolute_url }}">{{ course }}</a>
             </li>
-        {%  empty   %}
-            <li><em>There are currently no courses.</em></li>
+        {% empty %}
+            <li><em>There are currently no courses available.</em></li>
         {% endfor %}
     </ul>
-{%  endblock %}
+{% endblock %}

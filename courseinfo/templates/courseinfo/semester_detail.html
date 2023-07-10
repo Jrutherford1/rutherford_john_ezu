@@ -1,19 +1,32 @@
 {% extends 'courseinfo/base.html' %}
 
 {% block title %}
-    Semester Detail
+    Semester - {{ semester }}
 {% endblock %}
 
 {% block content %}
-    <h2>Semester Detail {{ semester }}</h2>
-    <ul>
+    <h2>{{ semester }}</h2>
+    <ul class="ezu-button-list">
         <li>
-            <a href="{{ semester.get_update_url }}"> Edit Semester</a>
-        </li>
+          <a href="{{ semester.get_update_url }}"
+             class="button button-primary">
+            Edit Semester</a></li>
         <li>
-            <a href="{{ semester.get_delete_url }}"> Delete Semester</a>
-        </li>
+          <a href="{{ semester.get_delete_url }}"
+             class="button button-primary">
+            Delete Semester</a></li>
     </ul>
 
-
+    <section>
+        <h3>Sections</h3>
+        <ul>
+            {% for section in section_list %}
+                <li>
+                    <a href="{{ section.get_absolute_url }}">{{ section }}</a>
+                </li>
+            {% empty %}
+                <li><em>There are currently no sections for this semester.</em></li>
+            {% endfor %}
+        </ul>
+    </section>
 {% endblock %}

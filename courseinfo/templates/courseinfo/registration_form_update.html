@@ -5,12 +5,11 @@
 {% endblock %}
 
 {% block content %}
-    <h2>Update Registration</h2>
     <form
         action="{{ registration.get_update_url }}"
         method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Update Registration</button>
+        <button type="submit" class="button button-primary">Update Registration</button>
     </form>
 {% endblock %}

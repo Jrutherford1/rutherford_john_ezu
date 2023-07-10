@@ -1,18 +1,20 @@
 {% extends 'courseinfo/base.html' %}
 
 {% block title %}
-    Instructor
+    Instructor - {{ instructor }}
 {% endblock %}
 
 {% block content %}
-    <h2>Instructor Detail: {{ instructor }}</h2>
-    <ul>
+    <h2>{{ instructor }}</h2>
+    <ul class="ezu-button-list">
         <li>
-            <a href="{{ instructor.get_update_url }}"> Edit Instructor</a>
-        </li>
+          <a href="{{ instructor.get_update_url }}"
+             class="button button-primary">
+            Edit Instructor</a></li>
         <li>
-            <a href="{{ instructor.get_delete_url }}"> Delete Instructor</a>
-        </li>
+          <a href="{{ instructor.get_delete_url }}"
+             class="button button-primary">
+            Delete Instructor</a></li>
     </ul>
 
     <section>
@@ -39,7 +41,7 @@
         <ul>
             {% for section in section_list %}
                 <li>
-                    <a href="{{  section.get_absolute_url }}">{{ section }}</a>
+                    <a href="{{ section.get_absolute_url }}">{{ section }}</a>
                 </li>
             {% empty %}
                 <li><em>There are currently no sections for this instructor.</em></li>
