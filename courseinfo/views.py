@@ -1,6 +1,7 @@
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
+from django.views.generic import ListView
 
 from courseinfo.forms import InstructorForm, SectionForm, CourseForm, SemesterForm, StudentForm, RegistrationForm
 from courseinfo.models import Instructor
@@ -9,52 +10,12 @@ from courseinfo.models import Course
 from courseinfo.models import Semester
 from courseinfo.models import Student
 from courseinfo.models import Registration
-from courseinfo.utils import ObjectCreateMixin
+from courseinfo.utils import ObjectCreateMixin, PageLinksMixin
 
 
-class InstructorList(View):
-    page_kwarg = 'page'
-    paginate_by = 25;  # 25 instructors per page
-    template_name = 'courseinfo/instructor_list.html'
-
-    def get(self, request):
-        instructors = Instructor.objects.all()
-        paginator = Paginator(
-            instructors,
-            self.paginate_by
-        )
-        page_number = request.GET.get(
-            self.page_kwarg
-        )
-        try:
-            page = paginator.page(page_number)
-        except PageNotAnInteger:
-            page = paginator.page(1)
-        except EmptyPage:
-            page = paginator.page(
-                paginator.num_pages)
-        if page.has_previous():
-            prev_url = "?{pkw}={n}".format(
-                pkw=self.page_kwarg,
-                n=page.previous_page_number())
-        else:
-            prev_url = None
-        if page.has_next():
-            next_url = "?{pkw}={n}".format(
-                pkw=self.page_kwarg,
-                n=page.next_page_number())
-        else:
-            next_url = None
-        context = {
-            'is_paginated':
-                page.has_other_pages(),
-            'next_page_url': next_url,
-            'paginator': paginator,
-            'previous_page_url': prev_url,
-            'instructor_list': page,
-        }
-        return render(
-            request, self.template_name, context)
+class InstructorList(PageLinksMixin, ListView):
+    paginate_by = 25
+    model = Instructor
 
 
 class InstructorDetail(View):
@@ -143,25 +104,26 @@ class InstructorDelete(View):
         return redirect('courseinfo_instructor_list_urlpattern')
 
 
-
-
-class SectionList(View):
-
-    def get(self, request):
-        return render(
-            request,
-            'courseinfo/section_list.html',
-            {'section_list': Section.objects.all()}
-        )
+class SectionList(ListView):
+    model = Section
+    permission_required = 'courseinfo.view_section'
 
 
 class SectionDetail(View):
     def get(self, request, pk):
         section = get_object_or_404(Section, pk=pk)
+        course = section.course
+        semester = section.semester
+        instructor = section.instructor
+        registration_list = Registration.objects.filter(section=section)
         return render(
             request,
             'courseinfo/section_detail.html',
-            {'section': section}
+            {'section': section,
+             'registration_list': registration_list,
+             'course': course,
+             'semester': semester,
+             'instructor': instructor}
         )
 
 
@@ -240,24 +202,20 @@ class SectionDelete(View):
         return redirect('courseinfo_section_list_urlpattern')
 
 
-
-class CourseList(View):
-
-    def get(self, request):
-        return render(
-            request,
-            'courseinfo/course_list.html',
-            {'course_list': Course.objects.all()}
-        )
+class CourseList(ListView):
+        model = Course
+        permission_required = 'courseinfo.view_course'
 
 
 class CourseDetail(View):
     def get(self, request, pk):
         course = get_object_or_404(Course, pk=pk)
+        section_list = Section.objects.filter(course=course)
         return render(
             request,
             'courseinfo/course_detail.html',
-            {'course': course}
+            {'course': course,
+             'section_list': section_list}
         )
 
 
@@ -335,24 +293,20 @@ class CourseDelete(View):
         return redirect('courseinfo_course_list_urlpattern')
 
 
-class SemesterList(View):
-
-    def get(self, request):
-        return render(
-            request,
-            'courseinfo/semester_list.html',
-            {'semester_list': Semester.objects.all()}
-        )
+class SemesterList(ListView):
+        model = Semester
+        permission_required = 'courseinfo.view_semester'
 
 
 class SemesterDetail(View):
-
     def get(self, request, pk):
         semester = get_object_or_404(Semester, pk=pk)
+        section_list = Section.objects.filter(semester=semester)
         return render(
             request,
             'courseinfo/semester_detail.html',
-            {'semester': semester}
+            {'semester': semester,
+             'section_list': section_list}
         )
 
 
@@ -432,67 +386,20 @@ class SemesterDelete(View):
         return redirect('courseinfo_semester_list_urlpattern')
 
 
-# class StudentList(View):
-#
-#     def get(self, request):
-#         return render(
-#             request,
-#             'courseinfo/student_list.html',
-#             {'student_list': Student.objects.all()}
-#         )
-
-class StudentList(View):
-    page_kwarg = 'page'
-    paginate_by = 25;  # 25 instructors per page
-    template_name = 'courseinfo/student_list.html'
-
-    def get(self, request):
-        students = Student.objects.all()
-        paginator = Paginator(
-            students,
-            self.paginate_by
-        )
-        page_number = request.GET.get(
-            self.page_kwarg
-        )
-        try:
-            page = paginator.page(page_number)
-        except PageNotAnInteger:
-            page = paginator.page(1)
-        except EmptyPage:
-            page = paginator.page(
-                paginator.num_pages)
-        if page.has_previous():
-            prev_url = "?{pkw}={n}".format(
-                pkw=self.page_kwarg,
-                n=page.previous_page_number())
-        else:
-            prev_url = None
-        if page.has_next():
-            next_url = "?{pkw}={n}".format(
-                pkw=self.page_kwarg,
-                n=page.next_page_number())
-        else:
-            next_url = None
-        context = {
-            'is_paginated':
-                page.has_other_pages(),
-            'next_page_url': next_url,
-            'paginator': paginator,
-            'previous_page_url': prev_url,
-            'student_list': page,
-        }
-        return render(
-            request, self.template_name, context)
+class StudentList(PageLinksMixin, ListView):
+    paginate_by = 25
+    model = Student
 
 
 class StudentDetail(View):
     def get(self, request, pk):
         student = get_object_or_404(Student, pk=pk)
+        registration_list = Registration.objects.filter(student=student)
         return render(
             request,
             'courseinfo/student_detail.html',
-            {'student': student}
+            {'student': student,
+             'registration_list': registration_list}
         )
 
 
@@ -570,23 +477,22 @@ class StudentDelete(View):
         return redirect('courseinfo_student_list_urlpattern')
 
 
-class RegistrationList(View):
-
-    def get(self, request):
-        return render(
-            request,
-            'courseinfo/registration_list.html',
-            {'registration_list': Registration.objects.all()}
-        )
+class RegistrationList(ListView):
+        model = Section
+        permission_required = 'courseinfo.view_registration'
 
 
 class RegistrationDetail(View):
     def get(self, request, pk):
         registration = get_object_or_404(Registration, pk=pk)
+        student = registration.student
+        section = registration.section
         return render(
-        request,
-        'courseinfo/registration_detail.html',
-        {'registration': registration}
+            request,
+            'courseinfo/registration_detail.html',
+            {'registration': registration,
+             'student': student,
+             'section': section}
         )
 
 
