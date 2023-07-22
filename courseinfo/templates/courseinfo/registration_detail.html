@@ -5,18 +5,23 @@
 {% endblock %}
 
 {% block content %}
-    <h2>{{ registration }}</h2>
-    <ul class="ezu-button-list">
+<article>
+  <div class="row">
+  <div class="offset-by-two eight columns">
+    <h2>{{ student }}</h2>
+    <ul class="inline">
+        {% if perms.courseinfo.change_student %}
         <li>
           <a href="{{ registration.get_update_url }}"
-             class="button button-primary">
+          class="button button-primary">
             Edit Registration</a></li>
-        <li>
+        {% endif %}
+        {% if perms.courseinfo.delete_student %}
           <a href="{{ registration.get_delete_url }}"
-             class="button button-primary">
+          class="button button-primary">
             Delete Registration</a></li>
+        {% endif %}
     </ul>
-
     <section>
         <table>
             <tr>
@@ -30,4 +35,7 @@
         </table>
     </section>
 
+  </div></div> <!-- row -->
+
+</article>
 {% endblock %}
