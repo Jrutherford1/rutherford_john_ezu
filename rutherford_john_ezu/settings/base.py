@@ -80,7 +80,7 @@ WSGI_APPLICATION = "rutherford_john_ezu.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "NAME": BASE_DIR / "../db.sqlite3", # Path: rutherford_john_ezu/db.sqlite3 the "../" looks one directory higher
     }
 }
 
@@ -114,7 +114,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = "static/"
-STATIC_ROOT = os.path.join(BASE_DIR, "static")
+STATIC_ROOT = os.path.join(BASE_DIR, "../../static")
 
 LOGIN_REDIRECT_URL = "about_urlpattern"
 
