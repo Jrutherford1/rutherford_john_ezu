@@ -118,7 +118,7 @@ class SectionDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
                 request,
                 'courseinfo/section_refuse_delete.html',
                 {'section': section,
-                'registrations': registrations,
+                    'registrations': registrations,
                  }
             )
         else:
